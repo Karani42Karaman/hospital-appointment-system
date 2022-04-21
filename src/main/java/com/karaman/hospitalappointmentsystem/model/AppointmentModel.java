@@ -30,11 +30,7 @@ public class AppointmentModel {
     @Temporal(TemporalType.TIME)
     @JsonFormat(pattern = "HH:mm:ss")
     private Date appointmentHour;
-/*
-    // Cardinality: 1-N
-    @OneToMany(mappedBy = "appointment", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<AppointmentModel> pages;
-*/
+
 
 
 

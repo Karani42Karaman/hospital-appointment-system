@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="appointment")
+@Table(name="black_list")
 public class BlackListModel {
 
     @Id

@@ -1,0 +1,31 @@
+Poliklink 1=>N Doktor
+Doctor 1=>N Randevu
+Hasta 1=>N Randevu
+
+
+
+Hasta N(Reçete)M Doktor
+
+
+
+
+Tablolarımız
+
+1- Yönetici (tablo)
+2- Hasta (tablo)
+3- Doktor (tablo)
+4- Randevu Model (tablo)
+5- Poliklinik (tablo)
+6- Kara Liste (ilişkiden doğan tablo => Hasta-Doktor-Randevu)
+7- Reçete (ilişkiden doğan tablo => Hasta-Doktor
+8- İlaç (ilişkiden doğan tablo => reçete-ilac) mullivalue nitelik den doğuyor
+
+
+
+
+sorularım :
+
+1- reçte de bir ilişki olduğu için buna bizim id eklememize gerek yok
+ancak multivalue ile birlikte eklemek istersek bizim id eklememiz gerekiyor
+bu yaptığımız doğru mu ?
+
