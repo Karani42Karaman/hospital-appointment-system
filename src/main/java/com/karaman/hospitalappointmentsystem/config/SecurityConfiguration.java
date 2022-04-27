@@ -42,7 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/js/**",
                         "/css/**",
                         "/img/**",
-                        "/doctor/**"//izin verilen entry pointler var
+                        "/static/**",
+                        "/bootstrap-error-page/**",
+                        "/mega-able-lite/**",
+                        "/login/**"//izin verilen entry pointler var
                         ).permitAll()
                 .antMatchers( "/webjars/**", "/assets/**").permitAll()
                 .antMatchers("/")
@@ -51,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/doctor/page")
+                .loginPage("/login/home/index")
                 .permitAll()
                 .and()
                 .logout()
