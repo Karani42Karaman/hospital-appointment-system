@@ -43,6 +43,11 @@ public class DoctorServiceImplt implements DoctorService {
     }
 
     @Override
+    public DoctorModel getDoctorModelBy(Long TCNumber, String password) {
+        return doctorRepository.getDoctorModelBy(TCNumber, password);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
     }

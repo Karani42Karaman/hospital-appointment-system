@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name="appointment")
+@Table(name="appointment")//Randevu tablosu
 public class AppointmentModel {
 
     public AppointmentModel() {
@@ -31,8 +31,21 @@ public class AppointmentModel {
     @JsonFormat(pattern = "HH:mm:ss")
     private Date appointmentHour;
 
+    @Column(name = "appointment_created_date")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date appointmentCreatedDate;
 
 
+    //doctor randevu  ilişkisi
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private DoctorModel doctor_id;
+
+    //hasta randevu  ilişkisi
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private PatientModel patient_id;
 
 
 }

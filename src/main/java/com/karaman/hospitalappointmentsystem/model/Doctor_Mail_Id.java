@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 //composit primary  keylerimiz
 @Embeddable
-public class MedicineId implements Serializable {
-    private Long prescription_id;
-    private String medicineName;
+public class Doctor_Mail_Id implements Serializable {
 
+    private Long doctor_id;
+    private String mail;
 }

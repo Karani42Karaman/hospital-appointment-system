@@ -41,4 +41,9 @@ public class ManagerServiceImplt implements ManagerService {
     public void deleteManagerById(Long id) {
         managerRepository.deleteById(id);
     }
+
+    @Override
+    public ManagerModel getManagerModelBy(Long TCNumber, String password) {
+        return managerRepository.getManagerModelBy(TCNumber, password);
+    }
 }

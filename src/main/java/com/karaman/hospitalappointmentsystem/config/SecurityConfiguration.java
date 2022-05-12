@@ -45,6 +45,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/static/**",
                         "/bootstrap-error-page/**",
                         "/mega-able-lite/**",
+                        "/manager/**",
+                        "/doctor/**",
+                        "/patient/**",
                         "/login/**"//izin verilen entry pointler var
                         ).permitAll()
                 .antMatchers( "/webjars/**", "/assets/**").permitAll()

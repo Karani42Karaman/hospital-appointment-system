@@ -4,16 +4,16 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-
 @Data
 @Entity
-@Table(name="medicine")
-public class MedicineModel {
+@Table(name="doctor_mail")
+public class Doctor_Mail {
 
     @EmbeddedId
-    MedicineId id;
+    Doctor_Mail_Id id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("prescription_id")
-    private PrescriptionModel prescription_id;
+    @MapsId("doctor_id")
+    private DoctorModel doctor_id;
+
 }

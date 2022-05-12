@@ -11,4 +11,5 @@ public interface ManagerService {
     ManagerModel getManagerById(Long id);
     ManagerModel updateManager(ManagerModel managerModel);
     void deleteManagerById(Long id);
+    ManagerModel getManagerModelBy(Long TCNumber, String password);
 }

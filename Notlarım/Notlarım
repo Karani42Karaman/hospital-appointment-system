@@ -11,21 +11,28 @@ Hasta N(Reçete)M Doktor
 
 Tablolarımız
 
-1- Yönetici (tablo)
-2- Hasta (tablo)
-3- Doktor (tablo)
+1- Yönetici (tablo) tamam
+2- Hasta (tablo)    tamam
+3- Doktor (tablo)   yanına polikik adı gelmiş neden bunu sor
 4- Randevu Model (tablo)
-5- Poliklinik (tablo)
-6- Kara Liste (ilişkiden doğan tablo => Hasta-Doktor-Randevu)
-7- Reçete (ilişkiden doğan tablo => Hasta-Doktor
-8- İlaç (ilişkiden doğan tablo => reçete-ilac) mullivalue nitelik den doğuyor
+5- Kara Liste (ilişkiden doğan tablo => Hasta-Doktor-Randevu)
+6- Reçete (ilişkiden doğan tablo => Hasta-Doktor
+7- İlaç (ilişkiden doğan tablo => reçete-ilac) mullivalue nitelik den doğuyor
 
 
 
 
-sorularım :
+ilişkiler bir dursun şimdilik tablolarımızın ilişkilerini kontrol ederek son halini yaz
 
-1- reçte de bir ilişki olduğu için buna bizim id eklememize gerek yok
-ancak multivalue ile birlikte eklemek istersek bizim id eklememiz gerekiyor
-bu yaptığımız doğru mu ?
+
+poliklinik olayını  yönetici doktor eklerken çoklu seçim yapılır olur biter liste şeklinde html den seçtiririz. büyük güvenlik
+açığı  olur ama kimin sikinde amk anlamıyor :)
+
+
+
+
+randevu tablosundaki ilişkiler yapıldı
+kara liste tablosundaki ilişkiler yapıldı
+reçete işi de bitti
+
 

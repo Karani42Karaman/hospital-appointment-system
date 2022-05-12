@@ -41,4 +41,9 @@ public class PatientServiceImplt implements PatientService {
     public void deletePatientById(Long id) {
         patientRepository.deleteById(id);
     }
+
+    @Override
+    public PatientModel getPatientModelBy(Long TCNumber, String password) {
+        return patientRepository.getPatientModelBy(TCNumber, password);
+    }
 }

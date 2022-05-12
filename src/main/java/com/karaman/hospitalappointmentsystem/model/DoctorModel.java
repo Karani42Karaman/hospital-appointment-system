@@ -3,8 +3,10 @@ package com.karaman.hospitalappointmentsystem.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,9 +27,6 @@ public class DoctorModel {
     @Column(name="gender")
     private char gender;
 
-    @Column(name="email")
-    private String email;
-
     @Column(name="password")
     private String password;
 
@@ -36,18 +35,20 @@ public class DoctorModel {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @Column(name="phone")
-    private Long phone;
-
-    @Column(name="jobPhoneNumber")
-    private Long jobPhoneNumber;
-
     @Column(name="appellation")
     private String appellation;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "appointmentFK_id", nullable = false)
-    private AppointmentModel appointment;
+    @Column(name="policlinic_name")
+    private String policlinicName;
 
+    //doctor randevu ilişkisi
+    @OneToMany(mappedBy = "doctor_id", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<AppointmentModel> Appointments;
+
+    //doctor reçete ilişkisi
+    @OneToMany(mappedBy = "doctor_id", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<PrescriptionModel> Prescriptions;
 
 }

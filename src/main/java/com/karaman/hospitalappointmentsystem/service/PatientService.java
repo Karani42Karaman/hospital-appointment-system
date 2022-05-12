@@ -13,5 +13,6 @@ public interface PatientService {
     PatientModel getPatientById(Long id);
     PatientModel updatePatient(PatientModel patientModel);
     void deletePatientById(Long id);
+    PatientModel getPatientModelBy(Long TCNumber, String password);
 
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name="manager")
+@Table(name="manager")//Yönetici Tablosu
 public class ManagerModel {
 
     @Id

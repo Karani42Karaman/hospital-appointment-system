@@ -12,4 +12,5 @@ public interface DoctorService  extends UserDetailsService {
     DoctorModel getDoctorById(Long id);
     DoctorModel updateDoctor(DoctorModel doctorModel);
     void deleteDoctorById(Long id);
+    DoctorModel getDoctorModelBy(Long TCNumber, String password);
 }
