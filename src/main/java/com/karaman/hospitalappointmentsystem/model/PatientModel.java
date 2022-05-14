@@ -13,7 +13,6 @@ import java.util.Set;
 public class PatientModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//autoincreament
     @Column(name="TCNumber")
     private Long TCNumber;
 

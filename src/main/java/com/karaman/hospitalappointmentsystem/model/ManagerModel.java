@@ -13,7 +13,6 @@ import java.util.Date;
 public class ManagerModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//autoincreament
     @Column(name="TCNumber")
     private Long TCNumber;
 

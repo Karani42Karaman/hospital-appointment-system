@@ -105,35 +105,10 @@
                             </li>
                         </ul>
 
-                        <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
-                                <a class="waves-effect waves-dark" asp-action="Index" asp-controller="PatientRegistrar">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Veznedarlarım</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
 
-                        <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
-                                <a class="waves-effect waves-dark" asp-action="Index" asp-controller="Department">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Klinikler</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
 
-                        <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
-                                <a class="waves-effect waves-dark" asp-action="MyProfile" asp-controller="Home">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Profilim</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
+
+
                     </div>
                 </nav>
                 <div class="pcoded-content">
@@ -161,40 +136,101 @@
                                     <div class="row">
                                         <div class="col-sm-12">
 
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Doktorlar Bölümleri Ve Poliklinikleri</h5><br />
-                                                <div class="card-header-right" >
-                                                    <a class="btn waves-effect waves-light hor-grd btn-grd-inverse " asp-action="CreateDoctor">Yeni Doktor</a>
+
+
+
+
+                                            <div class="col-sm-10 container-fluid">
+                                                <!-- Basic Form Inputs card start -->
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Doktor Ekleme Sayfası</h5>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <form asp-action="CreateDoctor" method="post">
+                                                            <input type="hidden" asp-for="RolId" value="@Model.RolId" />
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Ad</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required asp-for="Name" placeholder="Adını giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Soyad</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required asp-for="SurName" placeholder="Soyadını giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">TCno</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required value="" asp-for="Tcno" placeholder="TC Numaranızı giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Email</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required asp-for="Email" placeholder="Email'ini giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Doğum Tarihi</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="date" value="@DateTime.Now" class="form-control" required asp-for="BirthDate" placeholder="Doğum tarihini giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Telefon</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required value="" asp-for="Telephone" placeholder="Telefonunu giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Cinsiyet</label>
+                                                                <div class="col-sm-10">
+                                                                    <select asp-for="Gender" class="form-control" required>
+                                                                        <option value="true">Erkek</option>
+                                                                        <option value="false">Kadın</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Parola</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required asp-for="Password" placeholder="Parolasını giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Unvan</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required asp-for="Apellation" placeholder="Unvanını giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Departman</label>
+                                                                <div class="col-sm-10">
+                                                                    <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Departments" required>
+                                                                        <option hidden value="-1">Departman Seçiniz</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Policlinic</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required asp-for="PoliclinicName" placeholder="Policlinic adı giriniz">
+                                                                </div>
+                                                            </div>
+                                                            <br />
+                                                            <button type="submit" class="btn waves-effect waves-light btn-primary"><i class="icofont icofont-check-circled"></i>Kaydet</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
+
                                             </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Doktor Adı Soyadı</th>
-                                                            <th>Telefonu</th>
-                                                            <th>Unvan</th>
-
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                        <tr th:each="doctor:${doctors}">
-                                                            <td th:text="${doctor.name}"></td>
-                                                            <td th:text="${doctor.password}"></td>
-                                                            <td th:text="${doctor.gender}"></td>
 
 
-                                                        </tr>
 
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         </div>
                                     </div>

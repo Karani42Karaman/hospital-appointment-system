@@ -1,6 +1,7 @@
 package com.karaman.hospitalappointmentsystem.service;
 
 
+import com.karaman.hospitalappointmentsystem.dto.DoctorDto;
 import com.karaman.hospitalappointmentsystem.model.DoctorModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -12,5 +13,9 @@ public interface DoctorService  extends UserDetailsService {
     DoctorModel getDoctorById(Long id);
     DoctorModel updateDoctor(DoctorModel doctorModel);
     void deleteDoctorById(Long id);
+
     DoctorModel getDoctorModelBy(Long TCNumber, String password);
+    DoctorModel getDoctorModelByTCNumber(Long TCNumber);
+
+
 }

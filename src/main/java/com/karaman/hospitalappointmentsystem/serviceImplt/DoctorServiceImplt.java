@@ -1,5 +1,6 @@
 package com.karaman.hospitalappointmentsystem.serviceImplt;
 
+import com.karaman.hospitalappointmentsystem.dto.DoctorDto;
 import com.karaman.hospitalappointmentsystem.repository.DoctorRepository;
 import com.karaman.hospitalappointmentsystem.model.DoctorModel;
 import com.karaman.hospitalappointmentsystem.service.DoctorService;
@@ -46,6 +47,14 @@ public class DoctorServiceImplt implements DoctorService {
     public DoctorModel getDoctorModelBy(Long TCNumber, String password) {
         return doctorRepository.getDoctorModelBy(TCNumber, password);
     }
+
+    @Override
+    public DoctorModel getDoctorModelByTCNumber(Long TCNumber) {
+        return doctorRepository.getDoctorModelByTCNumber(TCNumber);
+    }
+
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

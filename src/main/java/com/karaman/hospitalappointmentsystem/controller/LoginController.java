@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -45,9 +47,10 @@ public class LoginController {
 
 
     @PostMapping(value = "/adminLogin")
-    public String adminLogin(LoginDto loginDto, Model model) {
+    public String adminLogin(LoginDto loginDto, Model model, HttpSession session) {
         ManagerModel managerModel = managerService.getManagerModelBy(loginDto.tcNumber, loginDto.password);
         if (managerModel != null) {
+
             return "redirect:/manager/getManagerPage";
         }
         return "login/home/doctorLoginPage";
@@ -59,13 +62,9 @@ public class LoginController {
         return "login/home/doctorLoginPage";
     }
 
-
     @PostMapping(value = "/patientLogin")
     public String patientLogin(LoginDto loginDto, Model model) {
         PatientModel patientModel = patientService.getPatientModelBy(loginDto.tcNumber, loginDto.password);
         return "login/home/doctorLoginPage";
     }
-
-
-
 }
