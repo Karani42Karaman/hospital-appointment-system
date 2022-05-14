@@ -54,7 +54,7 @@
                         <li class="user-profile header-notification">
                             <a href="#!" class="waves-effect waves-light">
                                 <img th:src="@{/mega-able-lite/assets/images/faq_man.png}" class="img-radius" alt="User-Profile-Image">
-                                <span>@activeSuperAdmin.Name @activeSuperAdmin.SurName</span>
+                                <span id="userName1"></span>
                                 <i class="ti-angle-down"></i>
                             </a>
                             <ul class="show-notification profile-notification">
@@ -79,7 +79,7 @@
                             <div class="main-menu-header">
                                 <img class="img-80 img-radius" th:src="@{/mega-able-lite/assets/images/faq_man.png}" alt="User-Profile-Image">
                                 <div class="user-details">
-                                    <span id="more-details">@activeSuperAdmin.Name @activeSuperAdmin.SurName</span>
+                                    <span id="userName"></span>
                                 </div>
                             </div>
 
@@ -87,7 +87,8 @@
                         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation" style="text-align:center"> Menü</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
-                                <a class="waves-effect waves-dark" asp-action="Index" asp-controller="Doctor">
+                                <a th:href="@{/manager/getManagerPage}"
+                                   class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Doktorlarım</span>
                                     <span class="pcoded-mcaret"></span>
@@ -97,14 +98,13 @@
 
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
-                                <a class="waves-effect waves-dark" asp-action="Index" asp-controller="Patient">
+                                <a th:href="@{/manager/getPatientIndexPage}">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Hastalarım</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                         </ul>
-
 
 
 
@@ -118,7 +118,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-8">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">Sayın @activeSuperAdmin.Apellation @activeSuperAdmin.Name @activeSuperAdmin.SurName</h5>
+                                        <h5 class="m-b-10" id="userName2"></h5>
                                         <p class="m-b-0">&nbsp;</p>
                                     </div>
                                 </div>
@@ -138,8 +138,6 @@
 
 
 
-
-
                                             <div class="col-sm-10 container-fluid">
                                                 <!-- Basic Form Inputs card start -->
                                                 <div class="card">
@@ -147,77 +145,97 @@
                                                         <h5>Doktor Ekleme Sayfası</h5>
                                                     </div>
                                                     <div class="card-block">
-                                                        <form asp-action="CreateDoctor" method="post">
-                                                            <input type="hidden" asp-for="RolId" value="@Model.RolId" />
+                                                        <form th:action="@{/manager/postDoctorCreatePage}" method="POST">
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Ad</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required asp-for="Name" placeholder="Adını giriniz">
+                                                                    <input type="text" class="form-control" required name="name">
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Soyad</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required asp-for="SurName" placeholder="Soyadını giriniz">
+                                                                    <input type="text" class="form-control" required name="surname" >
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">TCno</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required value="" asp-for="Tcno" placeholder="TC Numaranızı giriniz">
+                                                                    <input type="text" class="form-control" required  name="tcNumber" >
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Email</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required asp-for="Email" placeholder="Email'ini giriniz">
+                                                                    <input type="text" class="form-control" required name="mail">
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Doğum Tarihi</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="date" value="@DateTime.Now" class="form-control" required asp-for="BirthDate" placeholder="Doğum tarihini giriniz">
+                                                                    <input type="date" id="myDate" class="form-control" required name="birthDate" >
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Telefon</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required value="" asp-for="Telephone" placeholder="Telefonunu giriniz">
+                                                                    <input type="text" class="form-control" required name="telephoneNumber">
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Cinsiyet</label>
+                                                                <label class="col-sm-2 col-form-label">İş Telefonu </label>
                                                                 <div class="col-sm-10">
-                                                                    <select asp-for="Gender" class="form-control" required>
-                                                                        <option value="true">Erkek</option>
-                                                                        <option value="false">Kadın</option>
-                                                                    </select>
+                                                                    <input type="text" class="form-control" required name="internal_phone_number">
                                                                 </div>
                                                             </div>
+
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Cinsiyet (E/K) </label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" required name="gender"  >
+                                                                </div>
+                                                            </div>
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Parola</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required asp-for="Password" placeholder="Parolasını giriniz">
+                                                                    <input type="text" class="form-control" required name="password"   >
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Unvan</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required asp-for="Apellation" placeholder="Unvanını giriniz">
+                                                                    <input type="text" class="form-control" required name="appellation">
                                                                 </div>
                                                             </div>
+
+
                                                             <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Departman</label>
+                                                                <label class="col-sm-2 col-form-label">Poliklinik</label>
                                                                 <div class="col-sm-10">
-                                                                    <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Departments" required>
-                                                                        <option hidden value="-1">Departman Seçiniz</option>
+                                                                    <select   class="form-control" name="policlinicName" required>
+                                                                        <option  value="Poliklinik Göz">Poliklinik Göz</option >
+                                                                        <option  value="Poliklinik Kalp">Poliklinik Kalp</option >
+                                                                        <option  value="Poliklinik Cerrahi">Poliklinik Cerrahi</option >
+                                                                        <option  value="Poliklinik Kardiyoloji">Poliklinik Kardiyoloji</option >
+                                                                        <option  value="Poliklinik Gastroenteroloji">Poliklinik Gastroenteroloji</option >
+                                                                        <option  value="Poliklinik Dahiliye">Poliklinik Dahiliye</option >
+                                                                        <option  value="Poliklinik Nefroloji">Poliklinik Nefroloji</option >
+                                                                        <option  value="Poliklinik Dermatoloji">Poliklinik Dermatoloji</option >
+                                                                        <option  value="Poliklinik Psikiyatri">Poliklinik Psikiyatri</option >
+                                                                        <option  value="Poliklinik Nöroloji">Poliklinik Nöroloji</option >
+                                                                        <option  value="Poliklinik Ortapedi">Poliklinik Ortapedi</option >
+                                                                        <option  value="Poliklinik Kadın Doğum">Poliklinik Kadın Doğum</option >
+
                                                                     </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Policlinic</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required asp-for="PoliclinicName" placeholder="Policlinic adı giriniz">
                                                                 </div>
                                                             </div>
                                                             <br />
@@ -263,6 +281,31 @@
 <!-- Custom js -->
 <script type="text/javascript" th:src="@{/mega-able-lite/assets/js/script.js}"></script>
 
-</body>
+
+<script>
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    var user = getCookie("UserInfo");
+    $('#userName').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
+    $('#userName1').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
+    $('#userName2').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
+
+
+</script>
+    </body>
 
 </html>

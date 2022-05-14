@@ -38,6 +38,67 @@ public class ManagerController {
         return "/manager/doctor/doctorIndexPage";
     }
 
+    @GetMapping(value = "/getDoctorCreatePage")
+    public String getDoctorCreatePage(Model model){
+        return "/manager/doctor/doctorCreatePage";
+    }
+
+    @PostMapping(value = "/postDoctorCreatePage")
+    public String postDoctorCreatePage(@ModelAttribute("doctorDto") DoctorDto doctorDto){
+        DoctorModel doctorModel = new DoctorModel();
+        doctorModel.setName(doctorDto.getName());
+        doctorModel.setSurname(doctorDto.getSurname());
+        doctorModel.setTCNumber(doctorDto.getTcNumber());
+        doctorModel.setPassword(doctorDto.getPassword());
+        doctorModel.setBirthDate(doctorDto.getBirthDate());
+        doctorModel.setGender(doctorDto.getGender());
+        doctorModel.setAppellation(doctorDto.getAppellation());
+        doctorModel.setPoliclinicName(doctorDto.getPoliclinicName());
+
+        doctorService.saveDoctor(doctorModel);
+
+
+        //mail
+        Doctor_Mail doctor_mail = new Doctor_Mail();
+        Doctor_Mail_Id doctor_mail_id = new Doctor_Mail_Id();
+
+        doctor_mail_id.setMail(doctorDto.getMail());
+        doctor_mail_id.setDoctor_id(doctorDto.getTcNumber());
+
+        doctor_mail.setId(doctor_mail_id);
+        doctor_mail.setDoctor_id(doctorModel);
+
+
+        mailService.saveDoctor_Mail(doctor_mail);
+
+        //telephone_job
+        Doctor_Job_Telephone doctor_job_telephone = new Doctor_Job_Telephone();
+        Doctor_Job_Telephone_Id doctor_job_telephone_id = new Doctor_Job_Telephone_Id();
+
+        doctor_job_telephone_id.setInternal_phone_number(doctorDto.getInternal_phone_number());
+        doctor_job_telephone_id.setDoctor_id(doctorDto.getTcNumber());
+
+        doctor_job_telephone.setId(doctor_job_telephone_id);
+        doctor_job_telephone.setDoctor_id(doctorModel);
+
+
+        doctor_job_telephoneService.saveDoctor_Job_Telephone(doctor_job_telephone);
+
+
+        //telephone
+        Doctor_Telephone doctor_telephone = new Doctor_Telephone();
+        Doctor_Telephone_Id doctor_telephone_id = new Doctor_Telephone_Id();
+
+        doctor_telephone_id.setTelephoneNumber(doctorDto.getTelephoneNumber());
+        doctor_telephone_id.setDoctor_id(doctorDto.getTcNumber());
+
+        doctor_telephone.setId(doctor_telephone_id);
+        doctor_telephone.setDoctor_id(doctorModel);
+
+
+        telephoneService.saveDoctor_Telephone(doctor_telephone);
+        return "redirect:/manager/getManagerPage";
+    }
 
     @GetMapping(value = "/getDoctorUpdatePage/{doctorId}")
     public String getDoctorUpdatePage(@PathVariable("doctorId") Long doctorId, Model model) {
@@ -67,7 +128,6 @@ public class ManagerController {
         return "/manager/doctor/doctorUpdatePage";
     }
 
-
     @PostMapping(value = "/postDoctorUpdatePage")
     public String postDoctorUpdatePage(@ModelAttribute("doctorDto") DoctorDto doctorDto, Model model) {
 
@@ -83,10 +143,7 @@ public class ManagerController {
 
         doctorService.updateDoctor(doctorModel);
 
-        // en azında kayıt etme işi böyle oluyor bunu  öğrendik
-        // önce sileceksin soonra yeni kayot edeceksinm
-
-        //mail
+         //mail
         Doctor_Mail doctor_mail = new Doctor_Mail();
         Doctor_Mail_Id doctor_mail_id = new Doctor_Mail_Id();
 
@@ -128,5 +185,21 @@ public class ManagerController {
 
         return "redirect:/manager/getManagerPage";
     }
+
+    @GetMapping(value = "/getDoctorDelete/{doctorId}")
+    public String getDoctorDelete(@PathVariable("doctorId") Long doctorId, Model model) {
+        mailService.removeDoctor_MailByDoctor_id(doctorId);
+        doctor_job_telephoneService.removeDoctor_Job_TelephoneBy(doctorId);
+        telephoneService.removeDoctor_TelephoneBy(doctorId);
+        doctorService.deleteDoctorById(doctorId);
+        return "redirect:/manager/getManagerPage";
+    }
+
+
+
+
+
+
+
 
 }

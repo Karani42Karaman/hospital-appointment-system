@@ -54,7 +54,7 @@
                         <li class="user-profile header-notification">
                             <a href="#!" class="waves-effect waves-light">
                                 <img th:src="@{/mega-able-lite/assets/images/faq_man.png}" class="img-radius" alt="User-Profile-Image">
-                                <span >@activeSuperAdmin.Name @activeSuperAdmin.SurName</span>
+                                <span id="userName1"></span>
                                 <i class="ti-angle-down"></i>
                             </a>
                             <ul class="show-notification profile-notification">
@@ -79,7 +79,7 @@
                             <div class="main-menu-header">
                                 <img class="img-80 img-radius" th:src="@{/mega-able-lite/assets/images/faq_man.png}" alt="User-Profile-Image">
                                 <div class="user-details">
-                                    <span id="more-details">@activeSuperAdmin.Name @activeSuperAdmin.SurName</span>
+                                    <span id="userName"></span>
                                 </div>
                             </div>
 
@@ -87,7 +87,8 @@
                         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation" style="text-align:center"> Menü</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
-                                <a class="waves-effect waves-dark" asp-action="Index" asp-controller="Doctor">
+                                <a th:href="@{/manager/getManagerPage}"
+                                   class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Doktorlarım</span>
                                     <span class="pcoded-mcaret"></span>
@@ -97,14 +98,13 @@
 
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
-                                <a class="waves-effect waves-dark" asp-action="Index" asp-controller="Patient">
+                                <a th:href="@{/manager/getPatientIndexPage}">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Hastalarım</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                         </ul>
-
 
 
 
@@ -118,7 +118,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-8">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10"  >Sayın @activeSuperAdmin.Apellation @activeSuperAdmin.Name @activeSuperAdmin.SurName</h5>
+                                        <h5 class="m-b-10" id="userName2"></h5>
                                         <p class="m-b-0">&nbsp;</p>
                                     </div>
                                 </div>
@@ -275,7 +275,30 @@
 <script th:src="@{/mega-able-lite/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
 <!-- Custom js -->
 <script type="text/javascript" th:src="@{/mega-able-lite/assets/js/script.js}"></script>
+<script>
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 
+    var user = getCookie("UserInfo");
+    $('#userName').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
+    $('#userName1').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
+    $('#userName2').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
+
+
+</script>
 </body>
 
 </html>

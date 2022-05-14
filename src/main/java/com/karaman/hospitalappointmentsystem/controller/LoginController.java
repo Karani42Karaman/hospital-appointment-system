@@ -7,6 +7,7 @@ import com.karaman.hospitalappointmentsystem.model.PatientModel;
 import com.karaman.hospitalappointmentsystem.service.DoctorService;
 import com.karaman.hospitalappointmentsystem.service.ManagerService;
 import com.karaman.hospitalappointmentsystem.service.PatientService;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -47,24 +50,54 @@ public class LoginController {
 
 
     @PostMapping(value = "/adminLogin")
-    public String adminLogin(LoginDto loginDto, Model model, HttpSession session) {
+    public String adminLogin(LoginDto loginDto, Model model, HttpServletResponse response) {
         ManagerModel managerModel = managerService.getManagerModelBy(loginDto.tcNumber, loginDto.password);
         if (managerModel != null) {
 
-            return "redirect:/manager/getManagerPage";
+            String Unv= managerModel.getAppellation()+"/"+managerModel.getName()+"/"+managerModel.getSurname();
+
+            Cookie cookie1 = new Cookie("UserInfo", Unv);
+            cookie1.setMaxAge(1 * 24 * 60 * 60); // expires in 1 days
+            cookie1.setSecure(false);
+            cookie1.setHttpOnly(false);
+            cookie1.setPath("/");
+            response.addCookie(cookie1);
+             return "redirect:/manager/getManagerPage";
         }
         return "login/home/doctorLoginPage";
     }
 
     @PostMapping(value = "/doctorLogin")
-    public String doctorLogin(LoginDto loginDto, Model model) {
+    public String doctorLogin(LoginDto loginDto,  HttpServletResponse response) {
         DoctorModel doctorModel = doctorService.getDoctorModelBy(loginDto.tcNumber, loginDto.password);
+        if (doctorModel != null) {
+            String Unv= doctorModel.getAppellation()+";"+doctorModel.getName()+";"+doctorModel.getSurname();
+
+            Cookie cookie1 = new Cookie("UserInfo", Unv);
+            cookie1.setSecure(false);
+            cookie1.setHttpOnly(false);
+            cookie1.setPath("/");
+            response.addCookie(cookie1);
+
+            return "redirect:/doctor/getDoctorPage";
+        }
         return "login/home/doctorLoginPage";
     }
 
     @PostMapping(value = "/patientLogin")
-    public String patientLogin(LoginDto loginDto, Model model) {
+    public String patientLogin(LoginDto loginDto, HttpServletResponse response) {
         PatientModel patientModel = patientService.getPatientModelBy(loginDto.tcNumber, loginDto.password);
+        if (patientModel != null) {
+
+            String Unv=  "Sayın ;"+patientModel.getName()+";"+patientModel.getSurname();
+
+            Cookie cookie1 = new Cookie("UserInfo", Unv);
+            cookie1.setSecure(false);
+            cookie1.setHttpOnly(false);
+            cookie1.setPath("/");
+            response.addCookie(cookie1);
+            return "redirect:/patient/getPatientPage";
+        }
         return "login/home/doctorLoginPage";
     }
 }
