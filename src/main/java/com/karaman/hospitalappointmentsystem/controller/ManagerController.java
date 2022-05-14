@@ -196,8 +196,53 @@ public class ManagerController {
     }
 
 
+    @GetMapping(value = "/getPatientIndexPage")
+    public String getPatientIndexPage(Model model) {
+        model.addAttribute("patientList", patientService.getAllPatient());
+        return "manager/patient/patientIndexPage";
+    }
+
+    @GetMapping(value = "/getPatientCreatePage")
+    public String getPatientAddPage(Model model) {
+        return "manager/patient/patientCreatePage";
+    }
+
+    @PostMapping(value = "/postPatientCreatePage")
+    public  String postPatientCreatePage(@ModelAttribute("patient") PatientModel patient, Model model) {
+        if(patient != null) {
+            patientService.savePatient(patient);
+        }
+        return "redirect:/manager/getPatientIndexPage";
+    }
+
+    @GetMapping(value = "/getPatientUpdatePage/{patientId}")
+    public String getPatientUpdatePage(@PathVariable("patientId") Long patientId,Model model) {
+        model.addAttribute("patient", patientService.getPatientById(patientId));
+        return "manager/patient/patientUpdatePage";
+    }
+
+    @PostMapping(value = "/postPatientUpdatePage")
+    public String postPatientUpdatePage(@ModelAttribute("patient") PatientModel patient, Model model) {
+        if(patient != null) {
+            patientService.savePatient(patient);
+        }
+        return "redirect:/manager/getPatientIndexPage";
+    }
+
+    @GetMapping(value = "/getPatientDelete/{patientId}")
+    public String getPatientDelete(@PathVariable("patientId") Long patientId, Model model) {
+        patientService.deletePatientById(patientId);
+        return "redirect:/manager/getPatientIndexPage";
+    }
 
 
+
+    @GetMapping(value = "/getPatientDetail/{patientId}")
+    public String getPatientDetail(@PathVariable("patientId") Long patientId, Model model) {
+        PatientModel patientModel = patientService.getPatientById(patientId);
+        model.addAttribute("patient", patientModel);
+        return "manager/patient/patientDetailPage";
+    }
 
 
 
