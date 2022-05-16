@@ -2,8 +2,12 @@ package com.karaman.hospitalappointmentsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -23,18 +27,16 @@ public class AppointmentModel {
 
     @Column(name = "appointment_date")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    private Date appointmentDate;
+    private LocalDate appointmentDate;
 
     @Column(name = "appointment_hour")
-    @Temporal(TemporalType.TIME)
     @JsonFormat(pattern = "HH:mm:ss")
-    private Date appointmentHour;
+    private LocalTime appointmentHour;
 
     @Column(name = "appointment_created_date")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    private Date appointmentCreatedDate;
+
+    private LocalDateTime appointmentCreatedDate;
 
 
     //doctor randevu  ilişkisi

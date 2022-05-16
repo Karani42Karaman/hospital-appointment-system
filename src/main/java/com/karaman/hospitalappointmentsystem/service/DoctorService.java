@@ -17,5 +17,7 @@ public interface DoctorService  extends UserDetailsService {
     DoctorModel getDoctorModelBy(Long TCNumber, String password);
     DoctorModel getDoctorModelByTCNumber(Long TCNumber);
 
+    List<DoctorModel> getDoctorByPoliclinic(String policlinic);
+
 
 }

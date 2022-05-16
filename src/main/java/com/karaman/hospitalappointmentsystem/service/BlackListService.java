@@ -12,4 +12,6 @@ public interface BlackListService {
     BlackListModel getBlackListById(Long id);
     BlackListModel updateBlackList(BlackListModel blackListModel);
     void deleteBlackListById(Long id);
+    Long getBlackListPatinetCount(Long patientId);
+    void deleteByAppointId(Long appointId);
 }

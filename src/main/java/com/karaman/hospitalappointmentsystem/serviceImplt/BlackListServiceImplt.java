@@ -43,4 +43,14 @@ public class BlackListServiceImplt implements BlackListService {
     public void deleteBlackListById(Long id) {
         blackListRepository.deleteById(id);
     }
+
+    @Override
+    public Long getBlackListPatinetCount(Long patientId) {
+        return blackListRepository.getBlackListPatinetCount(patientId);
+    }
+
+    @Override
+    public void deleteByAppointId(Long appointId) {
+        blackListRepository.deleteByAppointId(appointId);
+    }
 }

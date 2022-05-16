@@ -53,7 +53,10 @@ public class DoctorServiceImplt implements DoctorService {
         return doctorRepository.getDoctorModelByTCNumber(TCNumber);
     }
 
-
+    @Override
+    public List<DoctorModel> getDoctorByPoliclinic(String policlinic) {
+        return doctorRepository.getDoctorByPoliclinic(policlinic);
+    }
 
 
     @Override

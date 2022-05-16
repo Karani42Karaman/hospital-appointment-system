@@ -2,6 +2,7 @@ package com.karaman.hospitalappointmentsystem.service;
 
 import com.karaman.hospitalappointmentsystem.model.AppointmentModel;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AppointmentService {
@@ -11,4 +12,6 @@ public interface AppointmentService {
     AppointmentModel getAppointmentById(Long id);
     AppointmentModel updateAppointment(AppointmentModel AppointmentModel);
     void deleteAppointmentById(Long id);
+    List<AppointmentModel> findByAppId(Long doctorId);
+    List<AppointmentModel> getAppointmentGt(LocalDate date, Long patientId);
 }

@@ -138,105 +138,70 @@
 
 
 
-
                                             <div class="col-sm-10 container-fluid">
                                                 <!-- Basic Form Inputs card start -->
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h5>Doktor Güncelleme Sayfası</h5>
+                                                        <h5>Hasta Ekleme Sayfası</h5>
                                                     </div>
                                                     <div class="card-block">
-                                                        <form th:action="@{/manager/postDoctorUpdatePage}" method="POST" th:object="${doctorDto}">
+                                                        <form th:action="@{/manager/postPatientCreatePage}" method="POST">
 
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Ad</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required name="name" th:value="*{getName()}">
+                                                                    <input type="text" class="form-control" required name="name">
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Soyad</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required name="surname" th:value="*{getSurname()}">
+                                                                    <input type="text" class="form-control" required name="surname" >
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">TCno</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required  name="tcNumber" th:value="*{getTcNumber()}">
+                                                                    <input type="text" class="form-control" required  name="TCNumber" >
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Email</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required name="mail" th:value="*{getMail()}">
+                                                                    <input type="text" class="form-control" required name="email">
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Doğum Tarihi</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="date" id="myDate" class="form-control" required name="birthDate" th:value="*{getBirthDate()}" >
+                                                                    <input type="date" id="myDate" class="form-control" required name="birthDate" >
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Telefon</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required name="telephoneNumber" th:value="*{getTelephoneNumber()}">
+                                                                    <input type="text" class="form-control" required name="phone">
                                                                 </div>
                                                             </div>
 
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">İş Telefonu </label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required name="internal_phone_number" th:value="*{getInternal_phone_number()}">
-                                                                </div>
-                                                            </div>
+
 
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Cinsiyet (E/K) </label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required name="gender" th:value="*{getGender()}">
+                                                                    <input type="text" class="form-control" required name="gender"  >
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group row">
                                                                 <label class="col-sm-2 col-form-label">Parola</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required name="password" th:value="*{getPassword()}" >
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Unvan</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" required name="appellation" th:value="*{getAppellation()}">
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Poliklinik</label>
-                                                                <div class="col-sm-10">
-                                                                    <select   class="form-control" name="policlinicName" required>
-                                                                        <option  value="Göz">Göz</option >
-                                                                        <option  value="Kalp">Kalp</option >
-                                                                        <option  value="Cerrahi">Cerrahi</option >
-                                                                        <option  value="Kardiyoloji">Kardiyoloji</option >
-                                                                        <option  value="Gastroenteroloji">Gastroenteroloji</option >
-                                                                        <option  value="Dahiliye">Dahiliye</option >
-                                                                        <option  value="Nefroloji">Nefroloji</option >
-                                                                        <option  value="Dermatoloji">Dermatoloji</option >
-                                                                        <option  value="Psikiyatri">Psikiyatri</option >
-                                                                        <option  value="Nöroloji">Nöroloji</option >
-                                                                        <option  value="Ortapedi">Ortapedi</option >
-                                                                        <option  value="Kadın Doğum">Kadın Doğum</option >
-
-                                                                    </select>
+                                                                    <input type="text" class="form-control" required name="password"   >
                                                                 </div>
                                                             </div>
 
@@ -249,6 +214,7 @@
                                                 </div>
 
                                             </div>
+
 
 
 
@@ -283,6 +249,8 @@
 <script th:src="@{/mega-able-lite/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
 <!-- Custom js -->
 <script type="text/javascript" th:src="@{/mega-able-lite/assets/js/script.js}"></script>
+
+
 <script>
     function getCookie(cname) {
         var name = cname + "=";

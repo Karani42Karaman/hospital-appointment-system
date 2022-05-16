@@ -239,8 +239,7 @@ public class ManagerController {
 
     @GetMapping(value = "/getPatientDetail/{patientId}")
     public String getPatientDetail(@PathVariable("patientId") Long patientId, Model model) {
-        PatientModel patientModel = patientService.getPatientById(patientId);
-        model.addAttribute("patient", patientModel);
+        // ilerde kişiye ait tüm verileri getir
         return "manager/patient/patientDetailPage";
     }
 

@@ -50,7 +50,7 @@ public class LoginController {
 
 
     @PostMapping(value = "/adminLogin")
-    public String adminLogin(LoginDto loginDto, Model model, HttpServletResponse response) {
+    public String adminLogin(LoginDto loginDto, HttpSession session, HttpServletResponse response) {
         ManagerModel managerModel = managerService.getManagerModelBy(loginDto.tcNumber, loginDto.password);
         if (managerModel != null) {
 
@@ -62,40 +62,43 @@ public class LoginController {
             cookie1.setHttpOnly(false);
             cookie1.setPath("/");
             response.addCookie(cookie1);
+
+            session.setAttribute("manager", managerModel);
              return "redirect:/manager/getManagerPage";
         }
         return "login/home/doctorLoginPage";
     }
 
     @PostMapping(value = "/doctorLogin")
-    public String doctorLogin(LoginDto loginDto,  HttpServletResponse response) {
+    public String doctorLogin(LoginDto loginDto,  HttpServletResponse response, HttpSession session) {
         DoctorModel doctorModel = doctorService.getDoctorModelBy(loginDto.tcNumber, loginDto.password);
         if (doctorModel != null) {
-            String Unv= doctorModel.getAppellation()+";"+doctorModel.getName()+";"+doctorModel.getSurname();
+            String Unv= doctorModel.getAppellation()+"/"+doctorModel.getName()+"/"+doctorModel.getSurname();
 
             Cookie cookie1 = new Cookie("UserInfo", Unv);
             cookie1.setSecure(false);
             cookie1.setHttpOnly(false);
             cookie1.setPath("/");
             response.addCookie(cookie1);
-
+            session.setAttribute("doctor", doctorModel);
             return "redirect:/doctor/getDoctorPage";
         }
         return "login/home/doctorLoginPage";
     }
 
     @PostMapping(value = "/patientLogin")
-    public String patientLogin(LoginDto loginDto, HttpServletResponse response) {
+    public String patientLogin(LoginDto loginDto, HttpServletResponse response, HttpSession session) {
         PatientModel patientModel = patientService.getPatientModelBy(loginDto.tcNumber, loginDto.password);
         if (patientModel != null) {
 
-            String Unv=  "Sayın ;"+patientModel.getName()+";"+patientModel.getSurname();
+            String Unv=  "Sayın/"+patientModel.getName()+"/"+patientModel.getSurname();
 
             Cookie cookie1 = new Cookie("UserInfo", Unv);
             cookie1.setSecure(false);
             cookie1.setHttpOnly(false);
             cookie1.setPath("/");
             response.addCookie(cookie1);
+            session.setAttribute("patient", patientModel);
             return "redirect:/patient/getPatientPage";
         }
         return "login/home/doctorLoginPage";
