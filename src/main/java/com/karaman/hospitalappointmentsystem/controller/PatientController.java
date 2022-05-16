@@ -2,9 +2,7 @@ package com.karaman.hospitalappointmentsystem.controller;
 
 import com.karaman.hospitalappointmentsystem.dto.AppointmentDto;
 import com.karaman.hospitalappointmentsystem.dto.AppointmentViewDto;
-import com.karaman.hospitalappointmentsystem.model.AppointmentModel;
-import com.karaman.hospitalappointmentsystem.model.DoctorModel;
-import com.karaman.hospitalappointmentsystem.model.PatientModel;
+import com.karaman.hospitalappointmentsystem.model.*;
 import com.karaman.hospitalappointmentsystem.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +19,8 @@ import java.util.List;
 @RequestMapping("/patient")
 public class PatientController {
 
+    private final MedicineService medicineService;
+    private final PrescriptionService prescriptionService;
     private final DoctorService doctorService;
     private final BlackListService blackListService;
     private final AppointmentService appointmentService;
@@ -29,8 +29,10 @@ public class PatientController {
     public static LocalDate appDate;
     public static LocalTime appHour;
 
-    public PatientController(DoctorService doctorService, PatientService patientService, ManagerService managerService, Doctor_Job_TelephoneService doctor_job_telephoneService, Doctor_MailService mailService, Doctor_TelephoneService telephoneService, BlackListService blackListService, AppointmentService appointmentService) {
+    public PatientController(DoctorService doctorService, PatientService patientService, ManagerService managerService, Doctor_Job_TelephoneService doctor_job_telephoneService, Doctor_MailService mailService, Doctor_TelephoneService telephoneService, MedicineService medicineService, PrescriptionService prescriptionService, BlackListService blackListService, AppointmentService appointmentService) {
         this.doctorService = doctorService;
+        this.medicineService = medicineService;
+        this.prescriptionService = prescriptionService;
         this.blackListService = blackListService;
         this.appointmentService = appointmentService;
     }
@@ -42,8 +44,6 @@ public class PatientController {
 
     @GetMapping(value = "/getSelectingDepartment")
     public String getSelectingDepartment(Model model, HttpServletRequest request) {
-
-
         PatientModel sessionPatient = (PatientModel) request.getSession().getAttribute("patient");
         model.addAttribute("patient", sessionPatient.getName() + " " + sessionPatient.getSurname());
         Long blokCount = blackListService.getBlackListPatinetCount(sessionPatient.getTCNumber());
@@ -134,7 +134,6 @@ public class PatientController {
         return "redirect:/patient/getPatientPage";
     }
 
-
     @GetMapping(value = "/getAppointmentGt")
     public String getAppointmentGt(HttpServletRequest request, Model model) {
         PatientModel sessionPatient = (PatientModel) request.getSession().getAttribute("patient");
@@ -153,11 +152,53 @@ public class PatientController {
         return "/patient/appointment/FutureAppointments";
     }
 
+    @GetMapping(value = "/getAppointmentLt")
+    public String getAppointmentLt(HttpServletRequest request, Model model) {
+        PatientModel sessionPatient = (PatientModel) request.getSession().getAttribute("patient");
+        List<AppointmentModel> appointmentList = appointmentService.getAppointmentLt(LocalDate.now(), sessionPatient.getTCNumber());
+        ArrayList<AppointmentViewDto> appdto = new ArrayList<AppointmentViewDto>();
+        for (AppointmentModel appointment : appointmentList) {
+            DoctorModel doctorModel = doctorService.getDoctorById(appointment.getDoctor_id().getTCNumber());
+            AppointmentViewDto appointmentViewDto = new AppointmentViewDto();
+            appointmentViewDto.setAppointmentDate(appointment.getAppointmentDate().toString() + " : " + appointment.getAppointmentHour().toString());
+            appointmentViewDto.setIsim(doctorModel.getAppellation().toString() + "-" + doctorModel.getName().toString() + "-" + doctorModel.getSurname().toString());
+            appointmentViewDto.setDepartman(doctorModel.getPoliclinicName());
+            appointmentViewDto.setAppointmentId(appointment.getAppointmentId());
+            appdto.add(appointmentViewDto);
+        }
+        model.addAttribute("appdto", appdto);
+        return "/patient/appointment/PastAppointments";
+    }
+
     @GetMapping(value = "/getDeleteAppointment/{AppointmentId}")
     public String getDeleteAppointment(@PathVariable("AppointmentId") Long AppointmentId, Model model) {
-
-        blackListService.deleteByAppointId(AppointmentId);
+        blackListService.deleteApp(AppointmentId);
         appointmentService.deleteAppointmentById(AppointmentId);
         return "redirect:/patient/getAppointmentGt";
     }
+
+    @GetMapping(value="/getPrescribe")
+    public String getPrescribe(HttpServletRequest request, Model model){
+        PatientModel sessionPatient = (PatientModel) request.getSession().getAttribute("patient");
+        List<PrescriptionModel> prescriptions= prescriptionService.getPrescriptionPatientIdBy(sessionPatient.getTCNumber());
+        model.addAttribute("prescriptions", prescriptions);
+        return "/patient/Prescribe/prescribe";
+    }
+
+    @GetMapping(value="/getMedicine/{prescriptionId}")
+    public String getMedicine(@PathVariable("prescriptionId") Long prescriptionId, Model model){
+        List<MedicineModel> medicines= medicineService.getMedicinePrescriptionsId(prescriptionId);
+        model.addAttribute("medicines", medicines);
+        return "/patient/Prescribe/medicine";
+    }
+
+
+    @GetMapping(value="/getMyProfile")
+    public String getAddMedicine(HttpServletRequest request, Model model){
+        PatientModel sessionPatient = (PatientModel) request.getSession().getAttribute("patient");
+        model.addAttribute("patient", sessionPatient);
+        return "/patient/home/MyProfile";
+    }
+
+
 }

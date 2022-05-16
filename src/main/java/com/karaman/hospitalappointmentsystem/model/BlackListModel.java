@@ -1,6 +1,8 @@
 package com.karaman.hospitalappointmentsystem.model;
 
 import lombok.Data;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 

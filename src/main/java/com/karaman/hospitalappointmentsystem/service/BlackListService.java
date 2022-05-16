@@ -3,6 +3,7 @@ package com.karaman.hospitalappointmentsystem.service;
 
 
 import com.karaman.hospitalappointmentsystem.model.BlackListModel;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,5 +14,6 @@ public interface BlackListService {
     BlackListModel updateBlackList(BlackListModel blackListModel);
     void deleteBlackListById(Long id);
     Long getBlackListPatinetCount(Long patientId);
-    void deleteByAppointId(Long appointId);
+    @Transactional
+    void deleteApp(Long appointId);
 }

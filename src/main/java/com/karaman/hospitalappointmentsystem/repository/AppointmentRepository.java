@@ -17,5 +17,8 @@ public interface AppointmentRepository extends JpaRepository<AppointmentModel, L
     @Query(value = "SELECT * FROM HospitalAppointmentSystem.appointment where HospitalAppointmentSystem.appointment.appointment_date >= CAST(? as Date) and patient_id=?;", nativeQuery = true)
     List<AppointmentModel> getAppointmentGt(LocalDate date, Long patientId);
 
+    @Query(value = "SELECT * FROM HospitalAppointmentSystem.appointment where HospitalAppointmentSystem.appointment.appointment_date <= CAST(? as Date) and patient_id=?;", nativeQuery = true)
+    List<AppointmentModel> getAppointmentLt(LocalDate date, Long patientId);
+
 
 }

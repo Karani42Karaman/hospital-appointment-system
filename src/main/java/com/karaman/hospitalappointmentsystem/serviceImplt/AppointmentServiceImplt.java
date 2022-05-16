@@ -53,4 +53,9 @@ public class AppointmentServiceImplt implements AppointmentService {
     public List<AppointmentModel> getAppointmentGt(LocalDate date, Long patientId) {
         return appointmentRepository.getAppointmentGt(date,patientId);
     }
+
+    @Override
+    public List<AppointmentModel> getAppointmentLt(LocalDate date, Long patientId) {
+        return appointmentRepository.getAppointmentLt(date,patientId);
+    }
 }

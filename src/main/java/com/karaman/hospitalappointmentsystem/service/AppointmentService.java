@@ -14,4 +14,5 @@ public interface AppointmentService {
     void deleteAppointmentById(Long id);
     List<AppointmentModel> findByAppId(Long doctorId);
     List<AppointmentModel> getAppointmentGt(LocalDate date, Long patientId);
+    List<AppointmentModel> getAppointmentLt(LocalDate date, Long patientId);
 }

@@ -5,6 +5,7 @@ import com.karaman.hospitalappointmentsystem.repository.BlackListRepository;
 import com.karaman.hospitalappointmentsystem.service.BlackListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,7 +51,8 @@ public class BlackListServiceImplt implements BlackListService {
     }
 
     @Override
-    public void deleteByAppointId(Long appointId) {
-        blackListRepository.deleteByAppointId(appointId);
+    @Transactional
+    public void deleteApp(Long appointId) {
+        blackListRepository.deleteApp(appointId);
     }
 }

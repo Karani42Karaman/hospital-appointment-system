@@ -3,12 +3,13 @@ package com.karaman.hospitalappointmentsystem.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Data
 @Entity
 @Table(name="medicine")
-public class MedicineModel {
+public class MedicineModel implements Serializable {
 
     @EmbeddedId
     MedicineId id;

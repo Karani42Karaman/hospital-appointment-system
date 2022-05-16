@@ -98,7 +98,7 @@
             </ul>
             <ul class="pcoded-item pcoded-left-item">
               <li class="">
-                <a class="waves-effect waves-dark" asp-action="PastAppointments" asp-controller="Appointment">
+                <a class="waves-effect waves-dark" th:href="@{/patient/getAppointmentLt}">
                   <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                   <span class="pcoded-mtext" data-i18n="nav.dash.main">Geçmiş Randevular</span>
                   <span class="pcoded-mcaret"></span>
@@ -107,7 +107,7 @@
             </ul>
             <ul class="pcoded-item pcoded-left-item">
               <li class="">
-                <a class="waves-effect waves-dark" asp-action="FutureAppointments" asp-controller="Appointment">
+                <a class="waves-effect waves-dark" th:href="@{/patient/getAppointmentGt}">
                   <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                   <span class="pcoded-mtext" data-i18n="nav.dash.main">Gelecek Randevular</span>
                   <span class="pcoded-mcaret"></span>
@@ -117,7 +117,7 @@
 
             <ul class="pcoded-item pcoded-left-item">
               <li class="">
-                <a class="waves-effect waves-dark" asp-action="Index" asp-controller="Prescribe">
+                <a class="waves-effect waves-dark" th:href="@{/patient/getPrescribe}">
                   <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                   <span class="pcoded-mtext" data-i18n="nav.dash.main">Reçetelerim</span>
                   <span class="pcoded-mcaret"></span>
@@ -127,17 +127,7 @@
 
             <ul class="pcoded-item pcoded-left-item">
               <li class="">
-                <a class="waves-effect waves-dark" asp-action="Index" asp-controller="BlackList">
-                  <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                  <span class="pcoded-mtext" data-i18n="nav.dash.main">Karalistelerim</span>
-                  <span class="pcoded-mcaret"></span>
-                </a>
-              </li>
-            </ul>
-
-            <ul class="pcoded-item pcoded-left-item">
-              <li class="">
-                <a class="waves-effect waves-dark" asp-action="MyProfile" asp-controller="Home">
+                <a class="waves-effect waves-dark" th:href="@{/patient/getMyProfile}">
                   <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                   <span class="pcoded-mtext" data-i18n="nav.dash.main">Profilim</span>
                   <span class="pcoded-mcaret"></span>

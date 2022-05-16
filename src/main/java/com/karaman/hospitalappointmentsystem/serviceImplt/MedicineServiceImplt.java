@@ -17,28 +17,9 @@ public class MedicineServiceImplt implements MedicineService {
         this.medicineRepository = medicineRepository;
     }
 
-    @Override
-    public List<MedicineModel> getAllMedicine() {
-        return medicineRepository.findAll();
-    }
 
     @Override
-    public MedicineModel saveMedicine(MedicineModel medicineModel) {
-        return medicineRepository.save(medicineModel);
-    }
-
-    @Override
-    public MedicineModel getMedicineById(Long id) {
-        return medicineRepository.getById(id);
-    }
-
-    @Override
-    public MedicineModel updateMedicine(MedicineModel medicineModel) {
-        return medicineRepository.save(medicineModel);
-    }
-
-    @Override
-    public void deleteMedicineById(Long id) {
-        medicineRepository.deleteById(id);
+    public List<MedicineModel> getMedicinePrescriptionsId(Long prescriptionsId) {
+        return medicineRepository.getMedicinePrescriptionsId(prescriptionsId);
     }
 }
