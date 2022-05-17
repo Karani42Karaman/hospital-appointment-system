@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Hasta</title>
+    <title>Doctor</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -26,13 +26,15 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/icon/font-awesome/css/font-awesome.min.css}">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/customCss/patientStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/customCss/doctorStyle.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/css/jquery.mCustomScrollbar.css}">
 
 </head>
 
 <body>
 
+
+<!-- Pre-loader start -->
 
 <!-- Pre-loader end -->
 <div id="pcoded" class="pcoded">
@@ -80,36 +82,18 @@
                             <div class="main-menu-header">
                                 <img class="img-80 img-radius" th:src="@{/mega-able-lite/assets/images/faq_man.png}" alt="User-Profile-Image">
                                 <div class="user-details">
-                                    <span id="userName1"><b> </b></span>
+                                    <span id="userName1"></span>
                                 </div>
                             </div>
 
                         </div>
 
-                        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation" style="text-align:center;"> Menü</div>
+                        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation" style="text-align:center;">Menü</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
-                                <a class="waves-effect waves-dark" th:href="@{/patient/getSelectingDepartment}">
+                                <a class="waves-effect waves-dark" asp-action="TodayAppointments" asp-controller="Appointment">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Randevu Al</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
-                                <a class="waves-effect waves-dark" th:href="@{/patient/getAppointmentLt}">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Geçmiş Randevular</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
-                                <a class="waves-effect waves-dark" th:href="@{/patient/getAppointmentGt}">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Gelecek Randevular</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Gün İçi Randevularım</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
@@ -117,24 +101,13 @@
 
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
-                                <a class="waves-effect waves-dark" th:href="@{/patient/getPrescribe}">
-                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Reçetelerim</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-
-                        <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
-                                <a class="waves-effect waves-dark" th:href="@{/patient/getMyProfile}">
+                                <a class="waves-effect waves-dark" th:href="@{/doctor/getDoctorProfilePage}">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Profilim</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                         </ul>
-
                     </div>
                 </nav>
                 <div class="pcoded-content">
@@ -161,40 +134,19 @@
                                 <div class="page-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <!--                                            sayfa için-->
-
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Geçmiş Randevularım</h5>
-                                                </div>
-                                                <div class="card-block table-border-style">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                            <tr>
-                                                                <th>Randevu Tarihi</th>
-                                                                <th>Doktor Adı</th>
-                                                                <th>Departman</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                            <tr th:each="appointment:${appdto}">
-
-                                                                <td th:text="${appointment.getAppointmentDate()}"></td>
-                                                                <td th:text="${appointment.getIsim()}"></td>
-                                                                <td th:text="${appointment.getDepartman()}"></td>
-
-                                                            </tr>
-
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
 
 
-                                            <!--                                            sayfa sonu-->
+<!--                                             içerik başlangıcı-->
+
+
+
+
+                                            <h1>Anasayfa</h1>
+
+
+
+<!--                                            içerik bitişi-->
+
                                         </div>
                                     </div>
                                 </div>
@@ -211,9 +163,6 @@
 </div>
 
 
-<!-- Warning Section Starts -->
-<!-- Older IE warning message -->
-<!-- Warning Section Ends -->
 <!-- Required Jquery -->
 <script type="text/javascript" th:src="@{/mega-able-lite/assets/js/jquery/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/mega-able-lite/assets/js/jquery-ui/jquery-ui.min.js}"></script>
@@ -231,6 +180,7 @@
 <script th:src="@{/mega-able-lite/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
 <!-- Custom js -->
 <script type="text/javascript" th:src="@{/mega-able-lite/assets/js/script.js}"></script>
+
 
 
 <script>

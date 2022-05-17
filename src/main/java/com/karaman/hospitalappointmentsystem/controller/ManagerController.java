@@ -108,22 +108,25 @@ public class ManagerController {
         List<Doctor_Telephone> doctor_telephone = telephoneService.findByDoctor_Telephone_Id(doctorId);
         List<Doctor_Job_Telephone> doctor_job_telephone = doctor_job_telephoneService.findByDoctor_Job_Telephone_Id(doctorId);
 
-        DoctorDto doctorDto = new DoctorDto();
 
 
-        doctorDto.setMail(doctor_mail.iterator().next().getId().getMail());
-        doctorDto.setTelephoneNumber(doctor_telephone.iterator().next().getId().getTelephoneNumber());
-        doctorDto.setInternal_phone_number(doctor_job_telephone.iterator().next().getId().getInternal_phone_number());
-        doctorDto.setName(doctor.getName());
-        doctorDto.setSurname(doctor.getSurname());
-        doctorDto.setTcNumber(doctor.getTCNumber());
-        doctorDto.setPassword(doctor.getPassword());
-        doctorDto.setBirthDate(doctor.getBirthDate());
-        doctorDto.setGender(doctor.getGender());
-        doctorDto.setAppellation(doctor.getAppellation());
-        doctorDto.setPoliclinicName(doctor.getPoliclinicName());
+        if(doctor_mail.size()>0){
+            DoctorDto doctorDto = new DoctorDto();
+            doctorDto.setMail(doctor_mail.iterator().next().getId().getMail());
+            doctorDto.setTelephoneNumber(doctor_telephone.iterator().next().getId().getTelephoneNumber());
+            doctorDto.setInternal_phone_number(doctor_job_telephone.iterator().next().getId().getInternal_phone_number());
+            doctorDto.setName(doctor.getName());
+            doctorDto.setSurname(doctor.getSurname());
+            doctorDto.setTcNumber(doctor.getTCNumber());
+            doctorDto.setPassword(doctor.getPassword());
+            doctorDto.setBirthDate(doctor.getBirthDate());
+            doctorDto.setGender(doctor.getGender());
+            doctorDto.setAppellation(doctor.getAppellation());
+            doctorDto.setPoliclinicName(doctor.getPoliclinicName());
 
-        model.addAttribute("doctorDto", doctorDto);
+            model.addAttribute("doctorDto", doctorDto);
+        }
+
 
         return "/manager/doctor/doctorUpdatePage";
     }
