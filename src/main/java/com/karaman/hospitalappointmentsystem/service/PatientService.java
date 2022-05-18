@@ -3,6 +3,7 @@ package com.karaman.hospitalappointmentsystem.service;
 
 
 import com.karaman.hospitalappointmentsystem.model.PatientModel;
+import com.karaman.hospitalappointmentsystem.model.PrescriptionModel;
 
 import java.util.List;
 
@@ -14,5 +15,6 @@ public interface PatientService {
     PatientModel updatePatient(PatientModel patientModel);
     void deletePatientById(Long id);
     PatientModel getPatientModelBy(Long TCNumber, String password);
+
 
 }

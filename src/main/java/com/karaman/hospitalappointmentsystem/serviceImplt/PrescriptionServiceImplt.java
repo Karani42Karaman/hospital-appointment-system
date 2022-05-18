@@ -51,4 +51,9 @@ public class PrescriptionServiceImplt implements PrescriptionService {
     public List<PrescriptionModel> getPrescriptionPatientIdBy(Long patientId) {
         return prescriptionRepository.getPrescriptionPatientIdBy(patientId);
     }
+
+    @Override
+    public List<PrescriptionModel> getAllDesc() {
+        return prescriptionRepository.getAllDesc();
+    }
 }

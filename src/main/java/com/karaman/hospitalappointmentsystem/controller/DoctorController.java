@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 @Controller
@@ -102,21 +100,22 @@ public class DoctorController {
         prescriptionModel.setDoctor_id(sessionDoctor);
         prescriptionModel.setPatient_id(_PatientModel);
         prescriptionModel.setPrescriptionGiveDate(Date.from(Instant.now()));
-
         prescriptionService.savePrescription(prescriptionModel);
-
-        Stream<PrescriptionModel> prescriptionModelStream = prescriptionService.getAllPrescription().stream().sorted();
-        String [] medicines = prescriptionDto.getMedicine_name().split(",");
-
+        List<PrescriptionModel> getAlldsc = prescriptionService.getAllDesc();
+        String[] medicines = prescriptionDto.getMedicine_name().split("\r\n");
 
         for (String medicine : medicines) {
             MedicineModel medicineModel = new MedicineModel();
             MedicineId medicineId = new MedicineId();
 
             medicineId.setMedicineName(medicine);
+            medicineId.setPrescription_id(getAlldsc.get(0).getPrescriptionID());
+
+            medicineModel.setId(medicineId);
+            medicineModel.setPrescription_id(getAlldsc.get(0));
+            medicineService.saveMedicine(medicineModel);
         }
-
-
+        
         return "/doctor/CreatePrescribe";
     }
 
@@ -154,6 +153,5 @@ public class DoctorController {
         blackListService.saveBlackList(blackListModel1);
         return "redirect:/doctor/getTodayAppointments";
     }
-
 
 }

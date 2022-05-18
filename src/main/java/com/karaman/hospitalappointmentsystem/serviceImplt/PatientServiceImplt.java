@@ -1,6 +1,7 @@
 package com.karaman.hospitalappointmentsystem.serviceImplt;
 
 import com.karaman.hospitalappointmentsystem.model.PatientModel;
+import com.karaman.hospitalappointmentsystem.model.PrescriptionModel;
 import com.karaman.hospitalappointmentsystem.repository.PatientRepository;
 import com.karaman.hospitalappointmentsystem.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +47,6 @@ public class PatientServiceImplt implements PatientService {
     public PatientModel getPatientModelBy(Long TCNumber, String password) {
         return patientRepository.getPatientModelBy(TCNumber, password);
     }
+
+
 }

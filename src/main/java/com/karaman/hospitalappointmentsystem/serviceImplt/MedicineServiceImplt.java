@@ -22,4 +22,9 @@ public class MedicineServiceImplt implements MedicineService {
     public List<MedicineModel> getMedicinePrescriptionsId(Long prescriptionsId) {
         return medicineRepository.getMedicinePrescriptionsId(prescriptionsId);
     }
+
+    @Override
+    public MedicineModel saveMedicine(MedicineModel medicineModel) {
+        return medicineRepository.save(medicineModel);
+    }
 }
