@@ -146,43 +146,30 @@
 
                                             <!--                                             içerik başlangıcı-->
 
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Gün İçi Randevular</h5>
-                                                </div>
-                                                <div class="card-block table-border-style">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                            <tr>
-                                                                <th>T.C.</th>
-                                                                <th>Adı</th>
-                                                                <th>SoyAdı</th>
-                                                                <th>Randevu Tarihi</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr th:each="appointment:${appointments}">
-                                                                <td th:text="${appointment.getTcnumber()}"></td>
-                                                                <td th:text="${appointment.getName()}"></td>
-                                                                <td th:text="${appointment.getSurname()}"></td>
-                                                                <td th:text="${appointment.getAppointmentDate()+ ' : '+appointment.getAppointmentHour()}"></td>
-                                                                <td>
-                                                                    <a th:href="@{/doctor/getPrescriptions/{doctorId}/{patientId}/{appointmentId}   (doctorId=${appointment.getDoctorId()} , patientId = ${appointment.getPatientId()} ,appointmentId = ${appointment.getAppointmentId()}  ) }"
-                                                                       class="btn waves-effect waves-light btn-grd-success">Onayla</a>
-                                                                </td>
-                                                                <td>
-                                                                    <a th:href="@{/doctor/getBlackList/{doctorId}/{patientId}/{appointmentId}  (doctorId=${appointment.getDoctorId()} , patientId = ${appointment.getPatientId()} ,appointmentId = ${appointment.getAppointmentId()})}"
-                                                                       class="btn waves-effect waves-light btn-grd-danger">Reddet</a>
-                                                                </td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
 
+
+                                            <div class="col-md-10 container-fluid">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Kara Liste Oluştur</h5>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <form th:action="@{/doctor/postBlackList}"  method="POST">
+
+
+                                                            <div class="form-group form-default">
+                                                                <textarea name="description" rows="4" cols="50"> </textarea>
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Açıklama</label>
+                                                            </div>
+
+
+                                                            <br />
+                                                            <button type="submit" class="btn waves-effect waves-light btn-primary"><i class="icofont icofont-check-circled"></i>Kaydet</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-
 
                                             <!--                                            içerik bitişi-->
 

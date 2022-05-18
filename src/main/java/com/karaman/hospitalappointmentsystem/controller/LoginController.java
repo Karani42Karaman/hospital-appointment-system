@@ -10,10 +10,7 @@ import com.karaman.hospitalappointmentsystem.service.PatientService;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -102,5 +99,20 @@ public class LoginController {
             return "redirect:/patient/getPatientPage";
         }
         return "login/home/doctorLoginPage";
+    }
+
+
+
+    @GetMapping(value = "getAccountPage")
+    public String getAccountPage(){
+        return "login/home/createAccount";
+    }
+
+    @PostMapping(value = "/postPatientCreatePage")
+    public  String postPatientCreatePage(@ModelAttribute("patient") PatientModel patient, Model model) {
+        if(patient != null) {
+            patientService.savePatient(patient);
+        }
+        return "login/home/patientLoginPage";
     }
 }

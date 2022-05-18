@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -26,11 +27,10 @@ public interface AppointmentRepository extends JpaRepository<AppointmentModel, L
 
 
 
-    @Query("select new com.karaman.hospitalappointmentsystem.dto.TodayDto(p.TCNumber,p.name,p.surname,a.appointmentDate,a.appointmentHour, d.TCNumber,p.TCNumber,a.appointmentId) from AppointmentModel a,PatientModel p,DoctorModel  d where a.appointmentDate > :begindate and a.appointmentDate < :enddate and a.doctor_id.TCNumber = :doctorId ")
-    List<TodayDto> getAppointmentToday(@Param("begindate") LocalDate begindate, @Param("enddate") LocalDate enddate,@Param("doctorId") Long doctorId);
+    @Query("select new com.karaman.hospitalappointmentsystem.dto.TodayDto(p.TCNumber,p.name,p.surname,a.appointmentDate,a.appointmentHour, d.TCNumber,p.TCNumber,a.appointmentId) from AppointmentModel a,PatientModel p,DoctorModel  d where a.appointmentDate > :begindate and a.appointmentDate < :enddate and a.doctor_id.TCNumber = :doctorId and a.appointmentHour > :begintime")
+    List<TodayDto> getAppointmentToday(@Param("begindate") LocalDate begindate, @Param("enddate") LocalDate enddate, @Param("doctorId") Long doctorId,@Param("begintime") LocalTime begintime);
 
-
-
-
+    @Query(value = "SELECT * FROM HospitalAppointmentSystem.appointment where  HospitalAppointmentSystem.appointment.appointment_id=?;", nativeQuery = true)
+    AppointmentModel getAppointmentById(Long id);
 
 }

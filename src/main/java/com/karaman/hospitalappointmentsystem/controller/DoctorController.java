@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
@@ -21,10 +23,10 @@ import java.util.stream.Stream;
 @RequestMapping("/doctor")
 public class DoctorController {
 
-    private static  PatientModel patientModel;
-    private static  Long DoctorId;
-    private static  Long AppointmentId;
-    private static Long PatientId;
+    public static PatientModel _PatientModel;
+    public static Long _DoctorId;
+    public static Long _AppointmentId;
+    public static Long _PatientId;
     private final DoctorService doctorService;
     private final Doctor_MailService doctor_mailService;
     private final Doctor_Job_TelephoneService doctor_job_telephoneService;
@@ -33,9 +35,10 @@ public class DoctorController {
     private final PatientService patientService;
     private final MedicineService medicineService;
     private final PrescriptionService prescriptionService;
+    private final BlackListService blackListService;
 
     @Autowired
-    public DoctorController(DoctorService doctorService, Doctor_MailService doctor_mailService, Doctor_Job_TelephoneService doctor_job_telephoneService, Doctor_TelephoneService doctor_telephoneService, AppointmentService appointmentService, PatientService patientService, MedicineService medicineService, PrescriptionService prescriptionService) {
+    public DoctorController(DoctorService doctorService, Doctor_MailService doctor_mailService, Doctor_Job_TelephoneService doctor_job_telephoneService, Doctor_TelephoneService doctor_telephoneService, AppointmentService appointmentService, PatientService patientService, MedicineService medicineService, PrescriptionService prescriptionService, BlackListService blackListService) {
         this.doctorService = doctorService;
         this.doctor_mailService = doctor_mailService;
         this.doctor_job_telephoneService = doctor_job_telephoneService;
@@ -44,6 +47,7 @@ public class DoctorController {
         this.patientService = patientService;
         this.medicineService = medicineService;
         this.prescriptionService = prescriptionService;
+        this.blackListService = blackListService;
     }
 
     @GetMapping("/getDoctorPage")
@@ -71,17 +75,18 @@ public class DoctorController {
     @GetMapping("/getTodayAppointments")
     public String getTodayAppointments(HttpServletRequest request, Model model) {
         DoctorModel sessionDoctor = (DoctorModel) request.getSession().getAttribute("doctor");
-        List<TodayDto> appointments = appointmentService.getAppointmentToday(LocalDateTime.now().toLocalDate().plusDays(-1), LocalDateTime.now().toLocalDate().plusDays(1), sessionDoctor.getTCNumber());
+        LocalTime asda = LocalDateTime.now().toLocalTime();
+        List<TodayDto> appointments = appointmentService.getAppointmentToday(LocalDateTime.now().toLocalDate().plusDays(-1), LocalDateTime.now().toLocalDate().plusDays(1), sessionDoctor.getTCNumber(), LocalDateTime.now().toLocalTime());
         model.addAttribute("appointments", appointments);
         return "/doctor/TodayAppointments";
     }
 
     @RequestMapping(value="/getPrescriptions/{doctorId}/{patientId}/{appointmentId}", method= RequestMethod.GET)
     public String getPrescriptions(@PathVariable("doctorId") Long doctorId,@PathVariable("patientId") Long patientId,@PathVariable("appointmentId") Long appointmentId, HttpServletRequest request, Model model) {
-        PatientId=patientId;
-        DoctorId=doctorId;
-        AppointmentId=appointmentId;
-        patientModel = patientService.getPatientById(patientId);
+        _PatientId=patientId;
+        _DoctorId=doctorId;
+        _AppointmentId=appointmentId;
+        _PatientModel = patientService.getPatientById(_PatientId);
         return "/doctor/CreatePrescribe";
     }
 
@@ -95,7 +100,7 @@ public class DoctorController {
         prescriptionModel.setDescription(prescriptionDto.getDescription());
         prescriptionModel.setDiseaseName(prescriptionDto.getDisease_name());
         prescriptionModel.setDoctor_id(sessionDoctor);
-        prescriptionModel.setPatient_id(patientModel);
+        prescriptionModel.setPatient_id(_PatientModel);
         prescriptionModel.setPrescriptionGiveDate(Date.from(Instant.now()));
 
         prescriptionService.savePrescription(prescriptionModel);
@@ -109,21 +114,46 @@ public class DoctorController {
             MedicineId medicineId = new MedicineId();
 
             medicineId.setMedicineName(medicine);
-
-
         }
-
-
-
-
 
 
         return "/doctor/CreatePrescribe";
     }
 
 
+    @RequestMapping(value = "/getBlackList/{doctorId}/{patientId}/{appointmentId}", method = RequestMethod.GET)
+    public String getBlackList(@PathVariable("doctorId") Long doctorId, @PathVariable("patientId") Long patientId, @PathVariable("appointmentId") Long appointmentId, HttpServletRequest request, Model model) {
+        _PatientId = patientId;
+        _DoctorId = doctorId;
+        _AppointmentId=appointmentId;
+        _PatientModel = patientService.getPatientById(patientId);
+        return "/doctor/blackListPage";
+    }
 
 
+    @PostMapping(value = "/postBlackList")
+    public String postBlackList(@ModelAttribute("blackListModel") BlackListModel blackListModel, HttpServletRequest request) {
+
+        DoctorModel sessionDoctor = (DoctorModel) request.getSession().getAttribute("doctor");
+
+        BlackListModel blackListModel1 = new BlackListModel();
+
+        BlackListId blackListId = new BlackListId();
+        blackListId.setPatient_id(_PatientId);
+        blackListId.setDoctor_id(_DoctorId);
+        blackListId.setAppointment_id(_AppointmentId);
+
+
+        blackListModel1.setId(blackListId);
+        blackListModel1.setAdditions(1L);
+        blackListModel1.setDescription(blackListModel.getDescription());
+        blackListModel1.setDoctor_id(sessionDoctor);
+        blackListModel1.setPatient_id(_PatientModel);
+        blackListModel1.setAppointment_id(appointmentService.getAppointmentById(_AppointmentId));
+
+        blackListService.saveBlackList(blackListModel1);
+        return "redirect:/doctor/getTodayAppointments";
+    }
 
 
 }

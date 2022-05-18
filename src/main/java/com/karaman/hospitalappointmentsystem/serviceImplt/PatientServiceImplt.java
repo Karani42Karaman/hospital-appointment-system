@@ -29,7 +29,7 @@ public class PatientServiceImplt implements PatientService {
 
     @Override
     public PatientModel getPatientById(Long id) {
-        return patientRepository.getById(id);
+        return patientRepository.getPatientById(id);
     }
 
     @Override
