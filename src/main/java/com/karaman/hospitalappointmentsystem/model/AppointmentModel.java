@@ -2,14 +2,15 @@ package com.karaman.hospitalappointmentsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+ ;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.Set;
 
 @Data
 @Entity
@@ -35,13 +36,13 @@ public class AppointmentModel {
 
     @Column(name = "appointment_created_date")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-
     private LocalDateTime appointmentCreatedDate;
 
 
     //doctor randevu  ilişkisi
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "doctor_id", nullable = false)
+    @JoinColumn(name = "doctor_id", nullable = false, insertable = false, updatable = false)
+    @Fetch(FetchMode.JOIN)
     private DoctorModel doctor_id;
 
     //hasta randevu  ilişkisi

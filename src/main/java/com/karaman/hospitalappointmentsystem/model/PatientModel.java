@@ -42,7 +42,7 @@ public class PatientModel {
     private Long phone;
 
     //hasta randevu ilişkisi
-    @OneToMany(mappedBy = "patient_id", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "patient_id",targetEntity = AppointmentModel.class, orphanRemoval = false, fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<AppointmentModel> Appointments;
 

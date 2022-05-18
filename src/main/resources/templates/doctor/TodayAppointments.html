@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
@@ -7,10 +7,12 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-    <meta name="keywords" content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
-    <meta name="author" content="codedthemes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description"
+          content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs."/>
+    <meta name="keywords"
+          content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="codedthemes"/>
     <!-- Favicon icon -->
     <link rel="icon" th:href="@{/mega-able-lite/assets/images/favicon.ico}" type="image/x-icon">
     <!-- Google font-->
@@ -18,13 +20,15 @@
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/css/bootstrap/css/bootstrap.min.css}">
     <!-- waves.css -->
-    <link rel="stylesheet" th:href="@{/mega-able-lite/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <link rel="stylesheet" th:href="@{/mega-able-lite/assets/pages/waves/css/waves.min.css}" type="text/css"
+          media="all">
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/icon/themify-icons/themify-icons.css}">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/icon/icofont/css/icofont.css}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/mega-able-lite/assets/icon/font-awesome/css/font-awesome.min.css}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/customCss/doctorStyle.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/mega-able-lite/assets/css/jquery.mCustomScrollbar.css}">
@@ -45,7 +49,7 @@
                 <div class="navbar-logo">
 
                     <a asp-action="Index" asp-controller="Home">
-                        <img class="img-fluid" th:src="@{/mega-able-lite/assets/images/logo.png}" alt="Theme-Logo" />
+                        <img class="img-fluid" th:src="@{/mega-able-lite/assets/images/logo.png}" alt="Theme-Logo"/>
                     </a>
 
                 </div>
@@ -56,7 +60,8 @@
                     <ul class="nav-right">
                         <li class="user-profile header-notification">
                             <a href="#!" class="waves-effect waves-light">
-                                <img th:src="@{/mega-able-lite/assets/images/faq_man.png}" class="img-radius" alt="User-Profile-Image">
+                                <img th:src="@{/mega-able-lite/assets/images/faq_man.png}" class="img-radius"
+                                     alt="User-Profile-Image">
                                 <span id="userName2"></span>
                                 <i class="ti-angle-down"></i>
                             </a>
@@ -80,7 +85,8 @@
                     <div class="pcoded-inner-navbar main-menu">
                         <div class="">
                             <div class="main-menu-header">
-                                <img class="img-80 img-radius" th:src="@{/mega-able-lite/assets/images/faq_man.png}" alt="User-Profile-Image">
+                                <img class="img-80 img-radius" th:src="@{/mega-able-lite/assets/images/faq_man.png}"
+                                     alt="User-Profile-Image">
                                 <div class="user-details">
                                     <span id="userName1"></span>
                                 </div>
@@ -88,7 +94,9 @@
 
                         </div>
 
-                        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation" style="text-align:center;">Menü</div>
+                        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation"
+                             style="text-align:center;">Menü
+                        </div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
                                 <a class="waves-effect waves-dark" th:href="@{/doctor/getTodayAppointments}">
@@ -136,16 +144,47 @@
                                         <div class="col-sm-12">
 
 
-<!--                                             içerik başlangıcı-->
+                                            <!--                                             içerik başlangıcı-->
+                                            
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Gün İçi Randevular</h5>
+                                                </div>
+                                                <div class="card-block table-border-style">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>T.C.</th>
+                                                                <th>Adı</th>
+                                                                <th>SoyAdı</th>
+                                                                <th>Randevu Tarihi</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr th:each="appointment:${appointments}">
+                                                                <td th:text="${appointment.getTcnumber()}"></td>
+                                                                <td th:text="${appointment.getName()}"></td>
+                                                                <td th:text="${appointment.getSurname()}"></td>
+                                                                <td th:text="${appointment.getAppointmentDate()+ ' : '+appointment.getAppointmentHour()}"></td>
+                                                                <td>
+                                                                    <a th:href="@{/doctor/getPrescriptions/{doctorId}/{patientId}  (doctorId=${appointment.getDoctorId()} , patientId = ${appointment.getPatientId()})}"
+                                                                       class="btn waves-effect waves-light btn-grd-success">Onayla</a>
+                                                                </td>
+                                                                <td>
+                                                                    <a th:href="@{/doctor/getPrescriptions/{doctorId}/{patientId}  (doctorId=${appointment.getDoctorId()} , patientId = ${appointment.getPatientId()})}"
+                                                                       class="btn waves-effect waves-light btn-grd-danger">Reddet</a>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-
-
-                                            <h1>Anasayfa</h1>
-
-
-
-<!--                                            içerik bitişi-->
+                                            <!--                                            içerik bitişi-->
 
                                         </div>
                                     </div>
@@ -182,7 +221,6 @@
 <script type="text/javascript" th:src="@{/mega-able-lite/assets/js/script.js}"></script>
 
 
-
 <script>
     function getCookie(cname) {
         var name = cname + "=";
@@ -201,9 +239,9 @@
     }
 
     var user = getCookie("UserInfo");
-    $('#userName').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
-    $('#userName1').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
-    $('#userName2').text( user.split("/")[0] + " " + user.split("/")[1]+ " " + user.split("/")[2] );
+    $('#userName').text(user.split("/")[0] + " " + user.split("/")[1] + " " + user.split("/")[2]);
+    $('#userName1').text(user.split("/")[0] + " " + user.split("/")[1] + " " + user.split("/")[2]);
+    $('#userName2').text(user.split("/")[0] + " " + user.split("/")[1] + " " + user.split("/")[2]);
 
 
 </script>

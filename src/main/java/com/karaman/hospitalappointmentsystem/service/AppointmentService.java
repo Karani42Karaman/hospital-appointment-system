@@ -1,5 +1,6 @@
 package com.karaman.hospitalappointmentsystem.service;
 
+import com.karaman.hospitalappointmentsystem.dto.TodayDto;
 import com.karaman.hospitalappointmentsystem.model.AppointmentModel;
 
 import java.time.LocalDate;
@@ -15,4 +16,6 @@ public interface AppointmentService {
     List<AppointmentModel> findByAppId(Long doctorId);
     List<AppointmentModel> getAppointmentGt(LocalDate date, Long patientId);
     List<AppointmentModel> getAppointmentLt(LocalDate date, Long patientId);
+    List<TodayDto> getAppointmentToday(LocalDate begindate,LocalDate enddate, Long patientId);
+
 }

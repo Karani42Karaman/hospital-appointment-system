@@ -1,5 +1,6 @@
 package com.karaman.hospitalappointmentsystem.serviceImplt;
 
+import com.karaman.hospitalappointmentsystem.dto.TodayDto;
 import com.karaman.hospitalappointmentsystem.model.AppointmentModel;
 import com.karaman.hospitalappointmentsystem.repository.AppointmentRepository;
 import com.karaman.hospitalappointmentsystem.service.AppointmentService;
@@ -58,4 +59,11 @@ public class AppointmentServiceImplt implements AppointmentService {
     public List<AppointmentModel> getAppointmentLt(LocalDate date, Long patientId) {
         return appointmentRepository.getAppointmentLt(date,patientId);
     }
+
+    @Override
+    public List<TodayDto> getAppointmentToday(LocalDate begindate, LocalDate enddate, Long patientId) {
+        return appointmentRepository.getAppointmentToday(begindate,enddate,patientId);
+    }
+
+
 }
