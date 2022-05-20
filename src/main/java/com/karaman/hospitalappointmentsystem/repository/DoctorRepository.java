@@ -13,7 +13,7 @@ public interface DoctorRepository extends JpaRepository<DoctorModel, Long> {
     @Query(value = "SELECT * FROM doctor u where u.TCNumber = ? and u.password = ?;", nativeQuery = true)
     DoctorModel getDoctorModelBy(Long TCNumber, String password);
 
-    @Query(value = "SELECT * FROM doctor u where u.TCNumber = ?;", nativeQuery = true)
+    @Query(value = "SELECT * FROM HospitalAppointmentSystem.doctor where HospitalAppointmentSystem.doctor.tcnumber = ?;", nativeQuery = true)
     DoctorModel getDoctorModelByTCNumber(Long TCNumber);
 
     @Query(value = "SELECT * FROM HospitalAppointmentSystem.doctor where HospitalAppointmentSystem.doctor.policlinic_name = ?;", nativeQuery = true)

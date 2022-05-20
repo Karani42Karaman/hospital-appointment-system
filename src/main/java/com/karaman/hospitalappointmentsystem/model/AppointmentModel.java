@@ -41,8 +41,7 @@ public class AppointmentModel {
 
     //doctor randevu  ilişkisi
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "doctor_id", nullable = false, insertable = false, updatable = false)
-    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "doctor_id", nullable = false)
     private DoctorModel doctor_id;
 
     //hasta randevu  ilişkisi

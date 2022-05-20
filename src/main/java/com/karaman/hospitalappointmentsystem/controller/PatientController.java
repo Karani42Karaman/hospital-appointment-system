@@ -129,7 +129,8 @@ public class PatientController {
         appointmentModel.setAppointmentHour(appHour);
         appointmentModel.setAppointmentCreatedDate(LocalDateTime.now());
         appointmentModel.setPatient_id(sessionPatient);
-        appointmentModel.setDoctor_id(doctorService.getDoctorById(doctorTcNo));
+
+        appointmentModel.setDoctor_id(doctorService.getDoctorModelByTCNumber(doctorTcNo));
         appointmentService.saveAppointment(appointmentModel);
         return "redirect:/patient/getPatientPage";
     }
