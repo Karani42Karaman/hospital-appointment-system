@@ -76,6 +76,7 @@ public class LoginController {
             cookie1.setSecure(false);
             cookie1.setHttpOnly(false);
             cookie1.setPath("/");
+
             response.addCookie(cookie1);
             session.setAttribute("doctor", doctorModel);
             return "redirect:/doctor/getDoctorPage";
