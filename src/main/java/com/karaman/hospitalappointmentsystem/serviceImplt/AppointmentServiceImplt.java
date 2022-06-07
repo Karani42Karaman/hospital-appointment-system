@@ -66,5 +66,10 @@ public class AppointmentServiceImplt implements AppointmentService {
         return  appointmentRepository.getAppointmentToday(begindate,enddate,doctorId,begintime);
     }
 
+    @Override
+    public void deleteAppointmentByDoctorId(Long doctorId) {
+        appointmentRepository.deleteAppointmentByDoctorId(doctorId);
+    }
+
 
 }

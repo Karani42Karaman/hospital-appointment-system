@@ -16,6 +16,7 @@ public interface PrescriptionService {
     @Modifying
     @Transactional
     List<PrescriptionModel> getPrescriptionPatientIdBy(Long patientId);
-
+    List<PrescriptionModel> getAllByDoctor(Long DoctorId);
     List<PrescriptionModel> getAllDesc();
+    void deleteByDoctor(Long doctorId);
 }

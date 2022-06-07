@@ -5,13 +5,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-
-@Data
+import java.io.Serializable;
 
 // Kara liste tablosu
+@Data
 @Entity
 @Table(name="black_list")// ilişkileri kurunca hata da gidecek
-public class BlackListModel {
+public class BlackListModel implements Serializable {
 
     @EmbeddedId
     BlackListId id;
@@ -31,9 +31,6 @@ public class BlackListModel {
     @MapsId("appointment_id")
     private AppointmentModel appointment_id;
 
-
-    @Column(name="additions")
-    private Long additions;
 
     @Column(name="description")
     private String description;

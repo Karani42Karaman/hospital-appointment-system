@@ -41,13 +41,11 @@ public class DoctorModel {
     private String policlinicName;
 
     //doctor randevu ilişkisi
-    @OneToMany(mappedBy = "doctor_id", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor_id", fetch = FetchType.LAZY)
     private Set<AppointmentModel> Appointments;
 
     //doctor reçete ilişkisi
-    @OneToMany(mappedBy = "doctor_id", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor_id", fetch = FetchType.LAZY)
     private Set<PrescriptionModel> Prescriptions;
 
 }

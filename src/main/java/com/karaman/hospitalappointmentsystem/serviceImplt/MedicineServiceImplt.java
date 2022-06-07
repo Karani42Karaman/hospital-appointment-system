@@ -27,4 +27,9 @@ public class MedicineServiceImplt implements MedicineService {
     public MedicineModel saveMedicine(MedicineModel medicineModel) {
         return medicineRepository.save(medicineModel);
     }
+
+    @Override
+    public void deleteByPreId(Long preId) {
+        medicineRepository.deleteByPreId(preId);
+    }
 }

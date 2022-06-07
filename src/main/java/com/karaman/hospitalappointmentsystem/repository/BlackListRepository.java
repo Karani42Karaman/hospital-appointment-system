@@ -20,4 +20,10 @@ public interface BlackListRepository extends JpaRepository<BlackListModel, Long>
     @Transactional
     @Query(value = "Delete from HospitalAppointmentSystem.black_list where black_list.appointment_id_appointment_id = ?", nativeQuery = true)
     void deleteApp(Long appointId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "Delete  from HospitalAppointmentSystem.black_list where doctor_id_tcnumber = ?;",nativeQuery = true)
+    void deleteBlackListByDoctorId(Long doctorId);
+
 }

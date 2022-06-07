@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
 @Controller
@@ -20,14 +19,22 @@ public class ManagerController {
     private final Doctor_Job_TelephoneService doctor_job_telephoneService;
     private final Doctor_MailService mailService;
     private final Doctor_TelephoneService telephoneService;
+    private final AppointmentService appointmentService;
+    private final BlackListService blackListService;
+    private final PrescriptionService prescriptionService;
+    private final MedicineService medicineService;
 
-    public ManagerController(DoctorService doctorService, PatientService patientService, ManagerService managerService, Doctor_Job_TelephoneService doctor_job_telephoneService, Doctor_MailService mailService, Doctor_TelephoneService telephoneService) {
+    public ManagerController(DoctorService doctorService, PatientService patientService, ManagerService managerService, Doctor_Job_TelephoneService doctor_job_telephoneService, Doctor_MailService mailService, Doctor_TelephoneService telephoneService, AppointmentService appointmentService, BlackListService blackListService, PrescriptionService prescriptionService, MedicineService medicineService) {
         this.doctorService = doctorService;
         this.patientService = patientService;
         this.managerService = managerService;
         this.doctor_job_telephoneService = doctor_job_telephoneService;
         this.mailService = mailService;
         this.telephoneService = telephoneService;
+        this.appointmentService = appointmentService;
+        this.blackListService = blackListService;
+        this.prescriptionService = prescriptionService;
+        this.medicineService = medicineService;
     }
 
 
@@ -144,7 +151,7 @@ public class ManagerController {
         doctorModel.setAppellation(doctorDto.getAppellation());
         doctorModel.setPoliclinicName(doctorDto.getPoliclinicName());
 
-        doctorService.updateDoctor(doctorModel);
+        doctorService.saveDoctor(doctorModel);
 
          //mail
         Doctor_Mail doctor_mail = new Doctor_Mail();
@@ -191,6 +198,7 @@ public class ManagerController {
 
     @GetMapping(value = "/getDoctorDelete/{doctorId}")
     public String getDoctorDelete(@PathVariable("doctorId") Long doctorId, Model model) {
+
         mailService.removeDoctor_MailByDoctor_id(doctorId);
         doctor_job_telephoneService.removeDoctor_Job_TelephoneBy(doctorId);
         telephoneService.removeDoctor_TelephoneBy(doctorId);

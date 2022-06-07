@@ -8,4 +8,5 @@ import java.util.List;
 public interface MedicineService {
     List<MedicineModel> getMedicinePrescriptionsId(Long prescriptionsId);
     MedicineModel saveMedicine(MedicineModel medicineModel);
+    void deleteByPreId(Long preId);
 }

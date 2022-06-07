@@ -20,5 +20,11 @@ public interface PrescriptionRepository extends JpaRepository<PrescriptionModel,
     @Query(value = "SELECT * FROM HospitalAppointmentSystem.prescription order by prescription_id desc;", nativeQuery = true)
     List<PrescriptionModel> getAllDesc();
 
+    @Query(value = "Delete  FROM HospitalAppointmentSystem.prescription where doctor_id=?;",nativeQuery = true)
+    void deleteByDoctor(Long doctorId);
+
+    @Query(value="select*  FROM HospitalAppointmentSystem.prescription where doctor_id=?;",nativeQuery = true)
+    List<PrescriptionModel> getAllByDoctor(Long DoctorId);
+
 
 }

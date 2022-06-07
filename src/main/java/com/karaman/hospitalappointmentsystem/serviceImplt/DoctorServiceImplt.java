@@ -4,9 +4,11 @@ import com.karaman.hospitalappointmentsystem.dto.DoctorDto;
 import com.karaman.hospitalappointmentsystem.repository.DoctorRepository;
 import com.karaman.hospitalappointmentsystem.model.DoctorModel;
 import com.karaman.hospitalappointmentsystem.service.DoctorService;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,7 +34,8 @@ public class DoctorServiceImplt implements DoctorService {
     public DoctorModel getDoctorById(Long id) {
         return doctorRepository.getById(id);
     }
-
+    @Transactional
+    @Modifying
     @Override
     public DoctorModel updateDoctor(DoctorModel doctorModel) {
         return doctorRepository.save(doctorModel);

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class BlackListServiceImplt implements BlackListService {
 
     @Autowired
@@ -54,5 +55,11 @@ public class BlackListServiceImplt implements BlackListService {
     @Transactional
     public void deleteApp(Long appointId) {
         blackListRepository.deleteApp(appointId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteBlackListByDoctorId(Long doctorId) {
+        blackListRepository.deleteBlackListByDoctorId(doctorId);
     }
 }

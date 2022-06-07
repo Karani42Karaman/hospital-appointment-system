@@ -33,4 +33,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentModel, L
     @Query(value = "SELECT * FROM HospitalAppointmentSystem.appointment where  HospitalAppointmentSystem.appointment.appointment_id=?;", nativeQuery = true)
     AppointmentModel getAppointmentById(Long id);
 
+    @Query(value = "Delete  FROM HospitalAppointmentSystem.appointment where doctor_id=?;",nativeQuery = true)
+    void deleteAppointmentByDoctorId(Long doctorId);
+
 }

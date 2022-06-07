@@ -144,7 +144,6 @@ public class DoctorController {
 
 
         blackListModel1.setId(blackListId);
-        blackListModel1.setAdditions(1L);
         blackListModel1.setDescription(blackListModel.getDescription());
         blackListModel1.setDoctor_id(sessionDoctor);
         blackListModel1.setPatient_id(_PatientModel);

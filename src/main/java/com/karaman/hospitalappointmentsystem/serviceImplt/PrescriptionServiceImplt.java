@@ -53,7 +53,17 @@ public class PrescriptionServiceImplt implements PrescriptionService {
     }
 
     @Override
+    public List<PrescriptionModel> getAllByDoctor(Long DoctorId) {
+        return prescriptionRepository.getAllByDoctor(DoctorId);
+    }
+
+    @Override
     public List<PrescriptionModel> getAllDesc() {
         return prescriptionRepository.getAllDesc();
+    }
+
+    @Override
+    public void deleteByDoctor(Long doctorId) {
+        prescriptionRepository.deleteByDoctor(doctorId);
     }
 }

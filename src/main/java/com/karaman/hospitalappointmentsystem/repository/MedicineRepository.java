@@ -14,5 +14,7 @@ public interface MedicineRepository extends JpaRepository<MedicineModel, Medicin
 
     @Query(value = "SELECT * FROM HospitalAppointmentSystem.medicine where prescription_id_prescription_id=?;", nativeQuery = true)
     List<MedicineModel> getMedicinePrescriptionsId(Long prescriptionsId);
+    @Query(value = "delete FROM HospitalAppointmentSystem.medicine where prescription_id_prescription_id=?;",nativeQuery = true)
+    void deleteByPreId(Long preId);
 
 }

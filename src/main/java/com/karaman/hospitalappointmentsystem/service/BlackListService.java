@@ -16,4 +16,6 @@ public interface BlackListService {
     Long getBlackListPatinetCount(Long patientId);
     @Transactional
     void deleteApp(Long appointId);
+    @Transactional
+    void deleteBlackListByDoctorId(Long doctorId);
 }

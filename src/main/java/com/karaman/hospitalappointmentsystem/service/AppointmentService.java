@@ -19,5 +19,6 @@ public interface AppointmentService {
     List<AppointmentModel> getAppointmentGt(LocalDate date, Long patientId);
     List<AppointmentModel> getAppointmentLt(LocalDate date, Long patientId);
     List<TodayDto> getAppointmentToday(LocalDate begindate,LocalDate enddate,Long doctorId,LocalTime begintime);
+    void deleteAppointmentByDoctorId(Long doctorId);
 
 }
